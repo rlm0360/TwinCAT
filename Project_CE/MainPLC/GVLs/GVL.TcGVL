@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.15">
+  <GVL Name="GVL" Id="{0bc4f1dc-e7b4-4f6e-a822-7d4197a350c5}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	bJogForward  	: BOOL;
+	bJogBackward 	: BOOL;
+	{attribute 'OPC.UA.DA' := '1'}
+	bEnable      	: BOOL;
+	bTestBit : BOOL;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

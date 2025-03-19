@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.15">
+  <POU Name="FB_AxisControl" Id="{81c7be62-b0d5-43b8-93e5-d5db8900c307}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_AxisControl
+VAR_INPUT
+	Axis : REFERENCE TO AXIS_REF;
+	MCPower : MC_Power;
+	MCJog : MC_Jog;
+	MCReadActVel : MC_ReadActualVelocity;
+	MCReadActPos : MC_ReadActualPosition;
+	bPosInterlockOK: BOOL;
+	bNegInterlockOK: BOOL;
+	bJogForward: BOOL;
+	bJogBackward: BOOL;
+	bInterlockOK: BOOL;
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[MCPower(
+	Axis:= Axis, 
+	Enable:= bInterlockOK, 
+	Enable_Positive:= bPosInterlockOK, 
+	Enable_Negative:= bNegInterlockOK, 
+	Override:= , 
+	);
+MCJog(
+	Axis:= Axis, 
+	JogForward:= bJogForward, 
+	JogBackwards:= bJogBackward, 
+	Mode:= MC_JOGMODE_STANDARD_FAST, 
+	Position:= , 
+	Velocity:= , 
+	Acceleration:= , 
+	Deceleration:= , 
+	Jerk:= , 
+	Done=> , 
+	Busy=> , 
+	Active=> , 
+	CommandAborted=> , 
+	Error=> , 
+	ErrorID=> );
+M_GetAxisData();]]></ST>
+    </Implementation>
+    <Method Name="M_GetAxisData" Id="{bfd37da3-8a23-405d-9f1c-7136d4d57c36}">
+      <Declaration><![CDATA[METHOD M_GetAxisData : BOOL
+VAR_INPUT
+	
+END_VAR
+
+VAR
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[MCReadActPos(
+	Axis:= Axis, 
+	Enable:= TRUE, 
+	Valid=> , 
+	Busy=> , 
+	Error=> , 
+	ErrorID=> , 
+	Position=> );
+	
+MCReadActVel(
+	Axis:= Axis, 
+	Enable:= TRUE, 
+	Valid=> , 
+	Busy=> , 
+	Error=> , 
+	ErrorID=> , 
+	ActualVelocity=> );
+	
+]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_AxisControl">
+      <LineId Id="59" Count="22" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_AxisControl.M_GetAxisData">
+      <LineId Id="7" Count="6" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="23" Count="6" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="30" Count="1" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
