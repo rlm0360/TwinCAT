@@ -18,6 +18,9 @@
     <LibraryReferences>{3a27a268-7dc4-471a-8a2f-749c58b3ae29}</LibraryReferences>
     <Released>false</Released>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Mixed Platforms' ">
+    <OutputPath>Bin\Mixed Platforms\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="GlobalTextList.TcGTLO">
       <SubType>Code</SubType>
